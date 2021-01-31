@@ -45,8 +45,9 @@
                                 <div class="button">C</div>
                             </div>
                             <div>
-                                <button onclick="verifyPin()" type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <button id="submit-button" onclick="remainingTry()" type="submit"
+                                    class="submit-btn">Submit</button>
+                                <p class="action-left"><span id="try">3</span> try left</p>
                             </div>
                         </div>
                     </div>
@@ -119,6 +120,25 @@
                 correct.style.display = 'block';
                 const incorrect = document.getElementById(IncorrectStatus);
                 incorrect.style.display = 'none';
+            }
+            //On click function in submit button
+            function remainingTry() {
+                const inputValue = document.getElementById('typed-pin').value;
+                if (inputValue == "") {
+                    alert("PIN field must not be empty");
+                    return false;
+                } else {
+                    const totalTry = document.getElementById('try');
+                    totalTry.innerText = totalTry.innerText - 1;
+                    // let timesLeft = parseInt(totalTry.innerText)
+
+                    if (totalTry.innerText === '0') {
+                        verifyPin();
+                        document.getElementById('submit-button').style.display = 'none';
+                    } else {
+                        verifyPin();
+                    }
+                }
             }
 
         </script>
